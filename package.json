@@ -1,6 +1,6 @@
 {
   "name": "multi-promise",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Run multiple promises in parallel with a strategy",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
