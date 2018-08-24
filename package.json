@@ -4,6 +4,7 @@
   "description": "Run multiple promises in parallel with a strategy",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": "berstend/multi-promise",
   "scripts": {
     "build": "rimraf dist && tsc",
     "test": "ava-ts -v",
