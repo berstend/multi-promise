@@ -1,0 +1,40 @@
+{
+  "name": "multi-promise",
+  "version": "1.3.1",
+  "description": "Run multiple promises in parallel with a strategy",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "test": "ava-ts -v",
+    "prepublish": "npm run build"
+  },
+  "keywords": [
+    "multi-promise",
+    "parallel promise",
+    "promise.all",
+    "promise timeout",
+    "promise abort",
+    "request parallel",
+    "request promise cancel"
+  ],
+  "author": "berstend",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^10.9.1",
+    "ava": "^0.25.0",
+    "ava-ts": "^0.25.1",
+    "prettier": "^1.14.2",
+    "prettier-tslint": "^0.4.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "rimraf": "^2.6.2",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "tslint-config-standard": "^7.1.0",
+    "typescript": "^3.0.1"
+  },
+  "dependencies": {
+    "debug": "^3.1.0"
+  }
+}
