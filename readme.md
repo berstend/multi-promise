@@ -1,4 +1,4 @@
-# multi-promise
+# multi-promise [![ ](https://img.shields.io/bundlephobia/min/multi-promise.svg)](https://bundlephobia.com/result?p=multi-promise@1.5.0) [![ ](https://img.shields.io/npm/v/multi-promise.svg)](https://www.npmjs.com/package/multi-promise)
 
 > Run multiple promises in parallel with a strategy
 
