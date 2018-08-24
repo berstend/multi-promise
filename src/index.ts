@@ -87,6 +87,7 @@ class MultiPromise extends EventEmitter implements MultiPromise {
   public transformResultFn: Function | null
   public cleanupFn: Function | null
 
+  private timeoutFn: number | null
   private isFinished: boolean
   private finishedPromise: Promise<Array<MultiPromiseTask>>
 
@@ -101,6 +102,7 @@ class MultiPromise extends EventEmitter implements MultiPromise {
     this.transformResultFn = options.transformResultFn || null
     this.cleanupFn = options.cleanupFn || null
 
+    this.timeoutFn = null
     this.isFinished = false
     this.finishedPromise = new Promise(resolve =>
       this.on('finished', result => resolve(result))
@@ -161,7 +163,7 @@ class MultiPromise extends EventEmitter implements MultiPromise {
     })
     if (this.timeout) {
       debug('enabled global timeout of %i', this.timeout)
-      setTimeout(this.onTimeout.bind(this), this.timeout)
+      this.timeoutFn = setTimeout(this.onTimeout.bind(this), this.timeout)
     }
     return this.finishedPromise
   }
@@ -223,6 +225,7 @@ class MultiPromise extends EventEmitter implements MultiPromise {
 
   private finish () {
     if (this.isFinished) return
+    if (this.timeoutFn) clearTimeout(this.timeoutFn)
     this.isFinished = true
     if (this.cleanupFn) this.cleanupFn.apply(this, [this.tasks])
 
