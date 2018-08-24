@@ -127,6 +127,63 @@ Return all promises, don't stop on errors
 
 Stop on erroneous promises (`Promise.all` behaviour)
 
+#### Custom strategy
+
+Example:
+
+```es6
+const firstSuccessStrategy = (task, tasks) => {
+  if (task.isError) task.addToResults = false
+  if (task.isSuccess) return true
+}
+
+const mp = new MultiPromise()
+const results = await mp.run(firstSuccessStrategy)
+```
+
+The strategy function is being called whenever a promise returns. By default all promise results are added to the final results array.
+Use `task.addToResults = false` to exclude a result. If the strategy function returns `true` then the existing results will be returned and the execution finished.
+
+## Options
+
+```typescript
+const mp = new MultiProxy({
+  timeout?: number // optional global timeout
+  returnUnfinished?: boolean // default: false, will add all promises to results
+  strategyFn?: MultiPromiseStrategy
+  determineSuccessFn?: Function
+  transformResultFn?: Function
+  cleanupFn?: Function
+})
+```
+
+## Task object
+
+An array of task objects will be returned.
+
+```typescript
+interface MultiPromiseTask {
+  /** User chosen task id of any type */
+  id?: any
+  /** Numerical task index, auto-generated */
+  index?: number
+  /** Anonymous task function returning a promise */
+  fn: (dummy?: any) => any
+  /** Promise handle */
+  handle?: Promise<any>
+  isFinished?: boolean
+  isSuccess?: boolean
+  isError?: boolean
+  addToResults?: boolean
+  result?: any
+  error?: any
+}
+```
+
+Successful (fulfilled) promises contain a `result` property, erroneous (rejected) promises an `error` property.
+
+In addition an optional `id` and a couple of booleanes are included.
+
 ## Debug
 
 ```bash
